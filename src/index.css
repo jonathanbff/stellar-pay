@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+/* Custom styles for mobile-first design */
+@layer base {
+  html {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-900;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .safe-area-pb {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Custom scrollbar for webkit browsers */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-full;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+}
+
+/* Telegram Web App specific styles */
+@media (max-width: 768px) {
+  .telegram-viewport {
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+}
+
+/* Animation classes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Button press animation */
+.btn-press {
+  transition: transform 0.1s ease;
+}
+
+.btn-press:active {
+  transform: scale(0.98);
+}
+
+/* Custom focus styles for better accessibility */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+}
+
+/* TON brand colors as CSS variables */
+:root {
+  --ton-orange: #fa9820;
+  --ton-orange-light: #fef3e2;
+  --ton-orange-dark: #c2410c;
+  --ton-white: #FFFFFF;
+  --ton-light-gray: #F5F8FA;
+  --ton-dark-gray: #2D2D2D;
+  --ton-success: #4CAF50;
+}
+
+/* Custom connect wallet button styles */
+.connect-wallet-btn {
+  background: linear-gradient(135deg, #fa9820 0%, #ea580c 100%);
+  transition: all 0.3s ease;
+}
+
+.connect-wallet-btn:hover {
+  background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(250, 152, 32, 0.3);
+}
+
+/* Custom disconnect wallet button styles */
+.disconnect-wallet-btn {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  border: 2px solid #f87171;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  transition: all 0.2s ease;
+}
+
+.disconnect-wallet-btn:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  border-color: #ef4444;
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+  transform: translateY(-1px);
+}
+
+.disconnect-wallet-btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+/* Disconnect wallet container styles */
+.disconnect-wallet-container {
+  background: linear-gradient(135deg, #fef2f2 0%, #fdf2f8 100%);
+  border: 2px solid #fecaca;
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+/* Connect wallet button centering styles */
+.connect-wallet-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.connect-wallet-btn {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+}
