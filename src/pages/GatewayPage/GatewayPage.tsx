@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Wallet, Shield, Zap, DollarSign, User } from 'lucide-react';
 import { BuyToken } from './components/BuyToken';
 import { MyTokens } from './components/MyTokens';
@@ -30,6 +30,16 @@ const GatewayPageContent: React.FC = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>('onboarding');
   const [tokens, setTokens] = useState<Token[]>([]);
   const { isConnected, publicKey, connect, disconnect, isLoading, error } = useWalletActions();
+  
+  // Auto-redirect to Stellar Pay Gateway
+  useEffect(() => {
+    const redirectToGateway = () => {
+      window.location.href = 'https://stellarpay-gateway.vercel.app/';
+    };
+    
+    // Redirect immediately when component mounts
+    redirectToGateway();
+  }, []);
   
   // Create Stellar wallet object from wallet context
   const stellarWallet: StellarWallet | null = isConnected && publicKey ? {
