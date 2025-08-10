@@ -34,8 +34,6 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          telegram: ['@telegram-apps/sdk-react', '@telegram-apps/telegram-ui'],
-          tonconnect: ['@tonconnect/ui-react'],
         },
       },
     },

@@ -16,9 +16,6 @@
   "dependencies": {
     "@creit.tech/stellar-wallets-kit": "^1.7.7",
     "@tailwindcss/postcss": "^4.1.11",
-    "@telegram-apps/sdk-react": "^3.3.1",
-    "@telegram-apps/telegram-ui": "^2.1.8",
-    "@tonconnect/ui-react": "^2.1.0",
     "eruda": "^3.4.1",
     "lucide-react": "^0.525.0",
     "qrcode.react": "^4.2.0",

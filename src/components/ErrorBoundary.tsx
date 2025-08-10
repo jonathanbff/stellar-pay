@@ -1,44 +1,34 @@
-import {
-  Component,
-  type ComponentType,
-  type GetDerivedStateFromError,
-  type PropsWithChildren,
-  type ReactNode,
-} from 'react';
+import { Component, type ReactNode } from 'react';
 
-export interface ErrorBoundaryProps extends PropsWithChildren {
-  fallback?: ReactNode | ComponentType<{ error: unknown }>;
+interface Props {
+  children: ReactNode;
+  fallback: (props: { error: unknown }) => ReactNode;
 }
 
-interface ErrorBoundaryState {
-  error?: unknown;
+interface State {
+  hasError: boolean;
+  error: unknown;
 }
 
-export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  state: ErrorBoundaryState = {};
+export class ErrorBoundary extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
 
-  // eslint-disable-next-line max-len
-  static getDerivedStateFromError: GetDerivedStateFromError<ErrorBoundaryProps, ErrorBoundaryState> = (error) => ({ error });
+  static getDerivedStateFromError(error: unknown): State {
+    return { hasError: true, error };
+  }
 
-  componentDidCatch(error: Error) {
-    this.setState({ error });
+  componentDidCatch(error: Error, errorInfo: any) {
+    console.error('ErrorBoundary caught an error:', error, errorInfo);
   }
 
   render() {
-    const {
-      state: {
-        error,
-      },
-      props: {
-        fallback: Fallback,
-        children,
-      },
-    } = this;
+    if (this.state.hasError) {
+      return this.props.fallback({ error: this.state.error });
+    }
 
-    return 'error' in this.state
-      ? typeof Fallback === 'function'
-        ? <Fallback error={error} />
-        : Fallback
-      : children;
+    return this.props.children;
   }
 }
